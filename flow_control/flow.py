@@ -22,3 +22,8 @@ def flow_edge(function: Function) -> OptionalFunction:
                 raise
 
     return wrapped_function
+
+
+def to_edge(number_of_edges: int = 1) -> None:
+    """Jump to the nearest flow edge."""
+    raise FlowException(number_of_edges)
