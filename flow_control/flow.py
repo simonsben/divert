@@ -9,9 +9,10 @@ Function = Callable[Arguments, Return]
 OptionalFunction = Callable[Arguments, Return | None]
 
 DefaultReturn = TypeVar("DefaultReturn")
+FlowEdgeWrapper = Callable[[Function], OptionalFunction]
 
 
-def custom_flow_edge(default_return: DefaultReturn, name: str | None = None) -> Callable[[Function], OptionalFunction]:
+def custom_flow_edge(default_return: DefaultReturn = None, name: str | None = None) -> FlowEdgeWrapper:
     """Flow edge that allows the default return value to be specified."""
 
     def flow_edge_wrapper(function: Function) -> OptionalFunction:
