@@ -1,4 +1,4 @@
-from typing import TypeVar, Generic
+from typing import TypeVar, Generic, Any
 
 
 class FlowException(Exception):
@@ -9,7 +9,7 @@ class FlowException(Exception):
 
         self._jumps_remaining = jumps
 
-    def raise_again(self) -> bool:
+    def raise_again(self, *_: Any) -> bool:
         """Whether the flow exception should be raised again."""
         self._jumps_remaining -= 1
         return self._jumps_remaining > 0

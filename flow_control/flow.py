@@ -23,7 +23,7 @@ def custom_flow_edge(default_return: DefaultReturn) -> Callable[[Function], Opti
                 return function(*args, **kwargs)  # Pass through the arguments and execute function
 
             except FlowException as flow_exception:  # If a flow exception occurs, catch it
-                if flow_exception.raise_again():  # Check if we want to jump to the next edge
+                if flow_exception.raise_again(wrapped_function):  # Check if we want to jump to the next edge
                     raise
 
                 if isinstance(flow_exception, PayloadFlowException):
