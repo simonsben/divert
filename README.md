@@ -32,3 +32,4 @@ def outer_function() -> int:
 ```
 
 For further motivation for using the library, see [the documentation](examples/motivation.md).
+For example usage, see [the examples](examples/).
