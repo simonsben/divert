@@ -5,7 +5,7 @@ class FlowException(Exception):
     """Exception to the normal execution flow."""
 
     def __init__(self, jumps: int = 1) -> None:
-        super().__init__()
+        super().__init__("Flow exception wasn't caught by a flow edge!")
 
         self._jumps_remaining = jumps
 
