@@ -1,0 +1,5 @@
+[tool.ruff]
+select = ["E", "F"]
+ignore = []
+
+line-length = 120
