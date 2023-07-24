@@ -1,3 +1,24 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flow-control"
+authors = [
+    { name = "Ben", email = "22123881+simonsben@users.noreply.github.com" },
+]
+description = "My package description"
+requires-python = ">=3.9"
+keywords = ["execution", "flow"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dynamic = ["version", "readme"]
+
+[tool.setuptools.dynamic]
+version = { file = ".version" }
+readme = { file = "README.md" }
+
 [tool.ruff]
 select = ["E", "F"]
 ignore = []

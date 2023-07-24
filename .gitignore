@@ -1,7 +1,11 @@
 .idea/
+__pycache__/
+
 .pytest_cache/
 .ruff_cache/
-__pycache__/
+
+dist/
+*.egg-info/
 
 .venv/
 venv/
