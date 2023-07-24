@@ -1,6 +1,6 @@
 from typing import Any
 
-from pytest import mark, fixture
+from pytest import mark
 from unittest.mock import MagicMock
 
 from flow_control.core import PayloadFlowException, FlowException
