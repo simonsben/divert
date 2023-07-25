@@ -8,7 +8,7 @@ authors = [
     { name = "Ben", email = "22123881+simonsben@users.noreply.github.com" },
 ]
 description = "My package description"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 keywords = ["execution", "flow"]
 classifiers = [
     "Programming Language :: Python :: 3",
