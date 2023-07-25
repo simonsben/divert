@@ -1,4 +1,4 @@
-# Motivation for flow control
+# Motivation for divert
 
 As the complexity of code increases, there are generally nested calls that want to exit at points.
 Generally, the common methods to pass that signal up to parent functions are,
@@ -130,18 +130,18 @@ def outer_function() -> int:
     return first_response + second_response + third_response
 ```
 
-## Flow Control
+## Divert
 
-Finally, we can use flow control and (effectively) take a hybrid approach,
+Finally, we can use divert and (effectively) take a hybrid approach,
 
 ```python
-from flow_control.flow import custom_flow_edge, to_edge
+from divert.flow import custom_flow_edge, divert
 
 
 def inner_function(number: int) -> int:
-    """Function that doubles the value or signals that the flow should change."""
+    """Function that doubles the value or signals that the execution flow should change."""
     if number == 4:  # Stop condition for sake of example
-        to_edge()  # If we want to specify the return value here we can instead use `payload_to_edge(VALUE)`
+        divert()  # If we want to specify the return value here we can instead use `payload_to_edge(VALUE)`
 
     return number * 2
 

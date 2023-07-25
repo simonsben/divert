@@ -2,8 +2,8 @@ from typing import Callable
 
 from pytest import mark
 
-from flow_control.flow import custom_flow_edge
-from flow_control.targeted import to_edge_target
+from divert.flow import custom_flow_edge
+from divert.targeted import divert_to_target
 from test.test_flow import DEFAULT_RETURN
 
 EDGE_NAME = "test_edge"
@@ -22,6 +22,6 @@ def test_targeted_jump(target_by_name: bool) -> None:
     def _inner_function() -> None:
         """Inner function requesting the jump."""
         target = EDGE_NAME if target_by_name else function
-        to_edge_target(target, DEFAULT_RETURN)
+        divert_to_target(target, DEFAULT_RETURN)
 
     assert function(lambda: _inner_function()) == DEFAULT_RETURN

@@ -1,6 +1,6 @@
 from typing import TypeVar, Callable, ParamSpec, Any
 
-from flow_control.core import FlowException, PayloadFlowException
+from divert.core import Diversion, PayloadDiversion
 
 Arguments = ParamSpec("Arguments")
 Return = TypeVar("Return")
@@ -23,12 +23,12 @@ def custom_flow_edge(default_return: DefaultReturn = None, name: str | None = No
             try:
                 return function(*args, **kwargs)  # Pass through the arguments and execute function
 
-            except FlowException as flow_exception:  # If a flow exception occurs, catch it
-                if flow_exception.raise_again(wrapped_function, name):  # Check if we want to jump to the next edge
+            except Diversion as diversion:  # If a diversion occurs, catch it
+                if diversion.raise_again(wrapped_function, name):  # Check if we want to jump to the next edge
                     raise
 
-                if isinstance(flow_exception, PayloadFlowException):
-                    return flow_exception.payload
+                if isinstance(diversion, PayloadDiversion):
+                    return diversion.payload
                 return default_return
 
         return wrapped_function
@@ -37,15 +37,15 @@ def custom_flow_edge(default_return: DefaultReturn = None, name: str | None = No
 
 
 def flow_edge(function: Function) -> OptionalFunction:
-    """Basic flow edge with a null return."""
+    """Basic execution flow edge with a null return."""
     return custom_flow_edge(default_return=None)(function)
 
 
-def to_edge(number_of_edges: int = 1) -> None:
-    """Jump to the nearest flow edge."""
-    raise FlowException(number_of_edges)
+def divert(number_of_edges: int = 1) -> None:
+    """Jump to the nearest execution flow edge."""
+    raise Diversion(number_of_edges)
 
 
-def payload_to_edge(payload: Any, number_of_edges: int = 1) -> None:
-    """Jump the payload to the nearest flow edge."""
-    raise PayloadFlowException(payload, number_of_edges)
+def divert_payload(payload: Any, number_of_edges: int = 1) -> None:
+    """Divert the payload to the nearest execution flow edge."""
+    raise PayloadDiversion(payload, number_of_edges)

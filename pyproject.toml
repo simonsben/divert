@@ -3,13 +3,13 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "flow-control"
+name = "divert"
 authors = [
     { name = "Ben", email = "22123881+simonsben@users.noreply.github.com" },
 ]
-description = "My package description"
+description = "Divert the execution flow."
 requires-python = ">=3.10"
-keywords = ["execution", "flow"]
+keywords = ["execution", "flow", "divert"]
 classifiers = [
     "Programming Language :: Python :: 3",
 ]

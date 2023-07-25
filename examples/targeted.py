@@ -1,5 +1,5 @@
-from flow_control.flow import custom_flow_edge
-from flow_control.targeted import to_edge_target
+from divert.flow import custom_flow_edge
+from divert.targeted import divert_to_target
 
 EDGE_NAME = "descriptive_edge_name"
 
@@ -7,7 +7,7 @@ EDGE_NAME = "descriptive_edge_name"
 def innermost_function(number: int) -> int:
     """Innermost function."""
     if number == 4:
-        to_edge_target(EDGE_NAME, payload=number)  # Pass back a specific value
+        divert_to_target(EDGE_NAME, payload=number)  # Pass back a specific value
     return number * 3
 
 

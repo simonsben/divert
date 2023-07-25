@@ -1,10 +1,10 @@
-from flow_control.flow import to_edge, flow_edge
+from divert.flow import divert, flow_edge
 
 
 def nested_function(number: int, should_raise: bool = False) -> int:
     """Example of a nested function that doubles values."""
     if should_raise:
-        to_edge()
+        divert()
 
     return number * 2
 

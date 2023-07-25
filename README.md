@@ -1,22 +1,22 @@
-# Flow Control
+# Divert
 
-Modify the execution flow of your code.
+Divert the execution flow of your code.
 This is useful for complex code with lots of method nesting and unpredictable return values.
 
 Plus, no sub-dependencies.
 
 ## Example usage
 
-For example, if we have an inner function (or multiple), we can immediately jump to a flow edge of our choice.
+For example, if we have an inner function (or multiple), we can immediately divert to a flow edge of our choice.
 
 ```python
-from flow_control.flow import custom_flow_edge, to_edge
+from divert.flow import custom_flow_edge, divert
 
 
 def inner_function(number: int) -> int:
     """Function that doubles the value or signals that the flow should change."""
     if number == 4:  # Stop condition for sake of example
-        to_edge()  # If we want to specify the return value here we can instead use `payload_to_edge(VALUE)`
+        divert()  # If we want to specify the return value here we can instead use `payload_to_edge(VALUE)`
 
     return number * 2
 
