@@ -1,5 +1,10 @@
+# Lint and test
 pytest~=7.4.0
 ruff~=0.0.280
 
+# Build
 build~=0.10.0
 wheel~=0.41.0
+
+# Upload
+twine~=4.0.2
