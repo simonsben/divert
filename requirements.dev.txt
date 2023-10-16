@@ -1,0 +1,9 @@
+# Test
+-r requirements.test.txt
+
+# Build
+build~=0.10.0
+wheel~=0.41.0
+
+# Upload
+twine~=4.0.2
