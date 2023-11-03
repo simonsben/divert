@@ -1,6 +1,7 @@
 from typing import Callable, TypeVar
 
 from divert.core import PayloadDiversion, Payload
+from divert.flow import finalize_diversion
 
 Target = TypeVar("Target", bound=Callable | str | None)
 
@@ -19,6 +20,6 @@ class TargetedDiversion(PayloadDiversion):
         return self._target != target_subject
 
 
-def divert_to_target(target: Target, payload: Payload = None) -> None:
+def divert_to_target(target: Target, payload: Payload = None, weak: bool = False) -> None:
     """Divert the payload to a flow edge specified by the function it wraps or the edge name."""
-    raise TargetedDiversion(target, payload)
+    raise finalize_diversion(TargetedDiversion, weak)(target, payload)

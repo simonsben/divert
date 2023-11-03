@@ -11,6 +11,8 @@ OptionalFunction = Callable[Arguments, Return | None]
 DefaultReturn = TypeVar("DefaultReturn")
 FlowEdgeWrapper = Callable[[Function], OptionalFunction]
 
+DiversionType = TypeVar("DiversionType", bound=Diversion)
+
 
 def custom_flow_edge(default_return: DefaultReturn = None, name: str | None = None) -> FlowEdgeWrapper:
     """Flow edge that allows the default return value to be specified."""
@@ -41,11 +43,16 @@ def flow_edge(function: Function) -> OptionalFunction:
     return custom_flow_edge(default_return=None)(function)
 
 
-def divert(number_of_edges: int = 1) -> None:
+def finalize_diversion(diversion: type[DiversionType], weak: bool) -> type[DiversionType]:
+    """Finalize the diversion class."""
+    return Diversion.make_weak if weak else diversion
+
+
+def divert(number_of_edges: int = 1, weak: bool = False) -> None:
     """Jump to the nearest execution flow edge."""
-    raise Diversion(number_of_edges)
+    raise finalize_diversion(Diversion, weak)(number_of_edges)
 
 
-def divert_payload(payload: Any, number_of_edges: int = 1) -> None:
+def divert_payload(payload: Any, number_of_edges: int = 1, weak: bool = False) -> None:
     """Divert the payload to the nearest execution flow edge."""
-    raise PayloadDiversion(payload, number_of_edges)
+    raise finalize_diversion(PayloadDiversion, weak)(payload, number_of_edges)

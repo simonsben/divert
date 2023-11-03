@@ -20,14 +20,19 @@ def test_flow_exception__raise_again(jumps: int) -> None:
 
 
 @flow_edge
-def user_function() -> None:
+def user_function(weak: bool) -> int | None:
     """Mocked outer call."""
     try:
-        divert_payload(PAYLOAD)
+        divert_payload(PAYLOAD, weak=weak)
     except Exception:
-        assert False, "Should never make it here."
+        assert weak, "Should not have made it here."
 
 
-def test_avoids_user_try_catch() -> None:
+@mark.parametrize("weak", (True, False))
+def test_avoids_user_try_catch(weak: bool) -> None:
     """Ensure the user can't accidentally catch the flow exception."""
-    assert user_function() == PAYLOAD, "Should have returned the user payload."
+    result = user_function(weak)
+    if weak:
+        assert result is None, "Should have been caught by the user try-except."
+    else:
+        assert result == PAYLOAD, "Should have returned the user payload."
