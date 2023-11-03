@@ -3,7 +3,7 @@ from typing import TypeVar, Generic, Any
 Payload = TypeVar("Payload")
 
 
-class Diversion(Exception):
+class Diversion(BaseException):
     """Diversion from the normal execution flow."""
 
     def __init__(self, jumps: int = 1) -> None:
